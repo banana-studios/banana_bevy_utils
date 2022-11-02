@@ -32,7 +32,6 @@ macro_rules! insert_resource {
     };
 }
 
-#[cfg(feature = "stageless")]
 #[macro_export]
 macro_rules! switch_in_game_state {
     ($e:expr) => {
@@ -40,4 +39,45 @@ macro_rules! switch_in_game_state {
             commands.insert_resource(NextState($e));
         }
     };
+}
+
+#[cfg(test)]
+mod tests {
+
+    mod stageless {
+        use super::*;
+        use bevy::{
+            ecs::system::{CommandQueue, Commands},
+            prelude::World,
+        };
+        use iyes_loopless::prelude::CurrentState;
+        use iyes_loopless::prelude::NextState;
+
+        #[derive(PartialEq, Debug)]
+        pub enum GameState {
+            A,
+            B,
+            C,
+        }
+
+        #[test]
+        fn switch_in_game_state() {
+            let mut world = World::default();
+            world.insert_resource(NextState(GameState::A));
+            assert_eq!(
+                NextState(GameState::A),
+                *world.get_resource::<NextState<GameState>>().unwrap()
+            );
+
+            let mut queue = CommandQueue::default();
+            let mut commands = Commands::new(&mut queue, &world);
+            switch_in_game_state!(GameState::B)(commands);
+            queue.apply(&mut world);
+
+            assert_eq!(
+                NextState(GameState::B),
+                *world.get_resource::<NextState<GameState>>().unwrap()
+            );
+        }
+    }
 }
