@@ -1,20 +1,24 @@
+use bevy::prelude::*;
+
 mod chain;
 mod macros;
-pub use chain::*;
 
 #[cfg(feature = "2d")]
 pub mod d2;
+#[cfg(feature = "rng")]
+mod rng;
 #[cfg(feature = "bevy_ui")]
 pub mod ui;
 
-use bevy::prelude::*;
 pub mod prelude {
+    pub use crate::chain::*;
+
     pub use crate::despawn_with;
     pub use crate::despawn_with_recursive;
     pub use crate::remove_from_all;
     pub use crate::remove_from_all_with;
     pub use crate::remove_resource;
-    pub use crate::{impl_default, impl_new};
+    pub use crate::{impl_default, impl_new, insert_resource, switch_in_game_state};
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

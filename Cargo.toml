@@ -4,10 +4,12 @@ name    = "banana_bevy_utils"
 publish = false
 version = "0.1.0"
 
-[dependencies]
-bevy          = { version = "0.8", default-features = false }
-iyes_loopless = { version = "0.8.0" }
-
 [features]
 2d      = ["bevy/bevy_sprite", "bevy/bevy_winit"]
 bevy_ui = ["bevy/bevy_ui"]
+rng     = ["bevy_turborand"]
+
+[dependencies]
+bevy           = { version = "0.8", default-features = false }
+bevy_turborand = { version = "0.3", optional = true }
+iyes_loopless  = { version = "0.8.0" }

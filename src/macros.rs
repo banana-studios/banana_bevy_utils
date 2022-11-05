@@ -25,10 +25,14 @@ macro_rules! impl_default {
 
 #[macro_export]
 macro_rules! insert_resource {
-    ($e:expr) => {
+    ($r:expr) => {
         |mut commands: Commands| {
-            commands.insert_resource($e);
+            commands.insert_resource($r);
         }
+    };
+
+    ($commands:ident, $r:expr) => {
+        $commands.insert_resource($r);
     };
 }
 
@@ -49,7 +53,6 @@ macro_rules! switch_in_game_state {
 mod tests {
 
     mod stageless {
-        use super::*;
         use bevy::{
             ecs::system::{CommandQueue, Commands},
             prelude::World,
@@ -60,7 +63,34 @@ mod tests {
         pub enum GameState {
             A,
             B,
-            C,
+        }
+
+        #[test]
+        fn insert_resource() {
+            let mut world = World::default();
+            world.insert_resource(GameState::A);
+            assert_eq!(GameState::A, *world.get_resource::<GameState>().unwrap());
+
+            let mut queue = CommandQueue::default();
+            let commands = Commands::new(&mut queue, &world);
+            insert_resource!(GameState::B)(commands);
+            queue.apply(&mut world);
+
+            assert_eq!(GameState::B, *world.get_resource::<GameState>().unwrap());
+        }
+
+        #[test]
+        fn insert_resource_with_commands() {
+            let mut world = World::default();
+            world.insert_resource(GameState::A);
+            assert_eq!(GameState::A, *world.get_resource::<GameState>().unwrap());
+
+            let mut queue = CommandQueue::default();
+            let mut commands = Commands::new(&mut queue, &world);
+            insert_resource!(commands, GameState::B);
+            queue.apply(&mut world);
+
+            assert_eq!(GameState::B, *world.get_resource::<GameState>().unwrap());
         }
 
         #[test]
@@ -73,7 +103,7 @@ mod tests {
             );
 
             let mut queue = CommandQueue::default();
-            let mut commands = Commands::new(&mut queue, &world);
+            let commands = Commands::new(&mut queue, &world);
             switch_in_game_state!(GameState::B)(commands);
             queue.apply(&mut world);
 
@@ -84,7 +114,7 @@ mod tests {
         }
 
         #[test]
-        fn switch_in_game_state_2() {
+        fn switch_in_game_state_with_commands() {
             let mut world = World::default();
             world.insert_resource(NextState(GameState::A));
             assert_eq!(
