@@ -1,6 +1,6 @@
 #![allow(clippy::type_complexity)]
 
-use crate::IntoChainResultSystem;
+use crate::chain::*;
 use bevy::prelude::*;
 
 /// For disabling some UI elements

@@ -3,8 +3,8 @@ use bevy::prelude::*;
 mod chain;
 mod macros;
 
-#[cfg(feature = "2d")]
-pub mod d2;
+// #[cfg(feature = "2d")]
+// pub mod d2;
 #[cfg(feature = "rng")]
 mod rng;
 #[cfg(feature = "bevy_ui")]
