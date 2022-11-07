@@ -8,6 +8,7 @@ version = "0.1.0"
 # 2d      = ["bevy/bevy_sprite", "bevy/bevy_winit"]
 bevy_ui = ["bevy/bevy_ui"]
 rng     = ["bevy_turborand"]
+states  = []
 
 [dependencies]
 bevy           = { version = "0.8", default-features = false }

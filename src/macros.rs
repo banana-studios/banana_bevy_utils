@@ -40,12 +40,12 @@ macro_rules! insert_resource {
 macro_rules! switch_in_game_state {
     ($e:expr) => {
         |mut commands: Commands| {
-            commands.insert_resource(NextState($e));
+            commands.insert_resource(iyes_loopless::prelude::NextState($e));
         }
     };
 
     ($commands:ident, $s:expr) => {
-        $commands.insert_resource(NextState($s));
+        $commands.insert_resource(iyes_loopless::prelude::NextState($s));
     };
 }
 

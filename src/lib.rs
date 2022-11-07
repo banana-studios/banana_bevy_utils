@@ -6,7 +6,9 @@ mod macros;
 // #[cfg(feature = "2d")]
 // pub mod d2;
 #[cfg(feature = "rng")]
-mod rng;
+pub mod rng;
+#[cfg(feature = "states")]
+pub mod state;
 #[cfg(feature = "bevy_ui")]
 pub mod ui;
 
@@ -19,6 +21,9 @@ pub mod prelude {
     pub use crate::remove_from_all_with;
     pub use crate::remove_resource;
     pub use crate::{impl_default, impl_new, insert_resource, switch_in_game_state};
+
+    #[cfg(feature = "states")]
+    pub use crate::state::*;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
