@@ -70,6 +70,6 @@ pub fn remove_from_all_with<T: Component, W: Component>(
 //////////////////////////////////////////////////////////////////////////////////////////
 
 /// Remove a resource using Commands
-pub fn remove_resource<T: Send + Sync + 'static>(mut cmd: Commands) {
+pub fn remove_resource<T: Resource>(mut cmd: Commands) {
     cmd.remove_resource::<T>();
 }

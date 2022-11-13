@@ -84,6 +84,22 @@ impl<
         self.system_ok.check_change_tick(change_tick);
         self.system_err.check_change_tick(change_tick);
     }
+
+    fn is_exclusive(&self) -> bool {
+        self.system_in.is_exclusive()
+            && self.system_ok.is_exclusive()
+            && self.system_err.is_exclusive()
+    }
+
+    fn get_last_change_tick(&self) -> u32 {
+        self.system_in.get_last_change_tick()
+    }
+
+    fn set_last_change_tick(&mut self, last_change_tick: u32) {
+        self.system_in.set_last_change_tick(last_change_tick);
+        self.system_ok.set_last_change_tick(last_change_tick);
+        self.system_err.set_last_change_tick(last_change_tick);
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

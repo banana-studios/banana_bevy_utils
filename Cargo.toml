@@ -1,9 +1,9 @@
 [package]
 edition = "2021"
+license = "MIT OR Apache-2.0"
 name    = "banana_bevy_utils"
 publish = false
 version = "0.1.0"
-license  = "MIT OR Apache-2.0"
 
 [features]
 # 2d      = ["bevy/bevy_sprite", "bevy/bevy_winit"]
@@ -12,6 +12,7 @@ rng     = ["bevy_turborand"]
 states  = []
 
 [dependencies]
-bevy           = { version = "0.8", default-features = false }
+bevy           = { version = "0.9", default-features = false }
 bevy_turborand = { version = "0.3", optional = true }
-iyes_loopless  = { version = "0.8.0" }
+# iyes_loopless  = { version = "0.8.0" }
+iyes_loopless = { git = "https://github.com/banana-studios/iyes_loopless" }
