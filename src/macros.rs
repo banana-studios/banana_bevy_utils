@@ -49,6 +49,19 @@ macro_rules! switch_in_game_state {
     };
 }
 
+#[macro_export]
+macro_rules! spawn_component {
+    ($c:expr) => {
+        |mut commands: Commands| {
+            commands.spawn($c);
+        }
+    };
+
+    ($commands:ident, $c:expr) => {
+        $commands.spawn($c);
+    };
+}
+
 #[cfg(test)]
 mod tests {
 

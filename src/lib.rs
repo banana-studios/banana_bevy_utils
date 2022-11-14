@@ -20,7 +20,9 @@ pub mod prelude {
     pub use crate::remove_from_all;
     pub use crate::remove_from_all_with;
     pub use crate::remove_resource;
-    pub use crate::{impl_default, impl_new, insert_resource, switch_in_game_state};
+    pub use crate::{
+        impl_default, impl_new, insert_resource, spawn_component, switch_in_game_state,
+    };
 
     #[cfg(feature = "states")]
     pub use crate::state::*;
