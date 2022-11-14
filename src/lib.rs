@@ -21,7 +21,8 @@ pub mod prelude {
     pub use crate::remove_from_all_with;
     pub use crate::remove_resource;
     pub use crate::{
-        impl_default, impl_new, insert_resource, spawn_component, switch_in_game_state,
+        despawn_children, impl_default, impl_new, insert_resource, spawn_component,
+        switch_in_game_state,
     };
 
     #[cfg(feature = "states")]
@@ -38,6 +39,15 @@ pub mod prelude {
 pub fn despawn_with<T: Component>(mut cmd: Commands, q: Query<Entity, With<T>>) {
     for e in q.iter() {
         cmd.entity(e).despawn();
+    }
+}
+
+/// Despawn all entities with a specific marker component
+///
+/// Useful when exiting states
+pub fn despawn_children<T: Component>(mut cmd: Commands, q: Query<Entity, With<T>>) {
+    for e in q.iter() {
+        cmd.entity(e).despawn_descendants();
     }
 }
 
