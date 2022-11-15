@@ -12,6 +12,6 @@ rng     = ["bevy_turborand"]
 states  = []
 
 [dependencies]
-bevy           = { git = "https://github.com/bevyengine/bevy", version = "0.9", default-features = false }
+bevy           = { version = "0.9", default-features = false }
 bevy_turborand = { version = "0.4", optional = true }
-iyes_loopless  = { git = "https://github.com/banana-studios/iyes_loopless", branch = "bevy_main" }
+iyes_loopless  = { git = "https://github.com/banana-studios/iyes_loopless" }
