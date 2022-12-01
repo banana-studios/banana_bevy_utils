@@ -14,4 +14,4 @@ states  = []
 [dependencies]
 bevy           = { version = "0.9", default-features = false }
 bevy_turborand = { version = "0.4", optional = true }
-iyes_loopless  = { git = "https://github.com/banana-studios/iyes_loopless" }
+iyes_loopless  = { version = "0.9" }
