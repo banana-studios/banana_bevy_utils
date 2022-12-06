@@ -2,7 +2,7 @@ use crate::switch_in_game_state;
 use bevy::{ecs::schedule::StateData, prelude::*};
 use iyes_loopless::state::CurrentState;
 
-pub trait StateNext: StateData {
+pub trait StateNext: StateData + Copy + Default  {
     fn next(&self) -> Option<Self>;
 }
 
